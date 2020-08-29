@@ -42,6 +42,20 @@ class CommandsSystem:
     def sendCommandUsage(self, id, command):
         comData = self.commands[command]
         self.Server.send(comData["usage"])
+
+    def onCommand(self, data):
+        id = data["id"]
+        if not self.accounts.isLoggedIn(id):
+            return
+
+        command = data["command"].lower()
+        rest = data["rest"]
+        params = data["params"]
+
+        if self.commandExists(command):
+            self.commands[command]["exec"](id, rest, params)
+        else:
+            self.Server.error(id, "The command '" + command + "' is invalid.")
     # -----commands start here-----
 
     def help(self, id, rest, params):
@@ -80,17 +94,3 @@ class CommandsSystem:
         userColor = self.formatting['fg'][player["color"]]
         self.Server.sendAll(
             f"{bold}[{tagColor}GLOBAL{reset}{bold}]{bold}<{reset}{userColor}{thisUsersName}{reset}{bold}>{reset}: {msgColor}{message}{reset}")
-
-    def onCommand(self, data):
-        id = data["id"]
-        if not self.accounts.isLoggedIn(id):
-            return
-
-        command = data["command"].lower()
-        rest = data["rest"]
-        params = data["params"]
-
-        if self.commandExists(command):
-            self.commands[command]["exec"](id, rest, params)
-        else:
-            self.Server.error(id, "The command '" + command + "' is invalid.")

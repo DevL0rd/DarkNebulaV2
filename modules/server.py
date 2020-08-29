@@ -1,6 +1,6 @@
 from modules.logging import Logging
 from modules.settings import Settings
-from modules.mudserver import MudServer
+from modules.telnet import TelnetServer
 from modules.accounts import AccountsSystem
 from modules.graphics import MudGraphics
 from modules.game import GameLogic
@@ -11,11 +11,11 @@ import time
 Logger = None
 
 
-class TelnetServer:
+class MudServer:
     def __init__(self, events):
         global Logger
         Logger = Logging(events, "Server")
-        self.Server = MudServer()
+        self.Server = TelnetServer()
         self.Events = events
         self.on = events.on
         self.clients = {}

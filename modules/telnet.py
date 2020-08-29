@@ -6,7 +6,7 @@ import sys
 from msvcrt import getch
 
 
-class MudServer(object):
+class TelnetClient(object):
     """    
     A basic server for text-based Multi-User Dungeon (MUD) games. 
 
@@ -65,7 +65,7 @@ class MudServer(object):
 
     def __init__(self):
         """    
-        Constructs the MudServer object and starts listening for new players.
+        Constructs the TelnetClient object and starts listening for new players.
         """
 
         self._clients = {}
@@ -221,7 +221,7 @@ class MudServer(object):
 
         # construct a new _Client object to hold info about the newly connected
         # client. Use 'nextid' as the new client's id number
-        self._clients[self._nextid] = MudServer._Client(
+        self._clients[self._nextid] = TelnetClient._Client(
             joined_socket, addr[0], "", time.time())
 
         # add a new player occurence to the new events list with the player's id
