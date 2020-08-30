@@ -9,24 +9,24 @@ class AccountsSystem:
         Logger = Logging(events, "Accounts")
         self.Events = events
         self.on = events.on
-        self.Server = server
+        self.server = server
         self.clients = {}
         self.playersSystem = playersSystem
         self.settings = settings
-        self.Server.on("connect", self.onConnect)
-        self.Server.on("disconnect", self.onDisconnect)
-        self.Server.on("command", self.onCommand)
+        self.server.on("connect", self.onConnect)
+        self.server.on("disconnect", self.onDisconnect)
+        self.server.on("command", self.onCommand)
 
     def onConnect(self, id):
         self.clients[id] = {
             "loggedIn": False
         }
-        self.Server.send(id, "Username: ")
+        self.server.send(id, "Username: ")
 
     def onDisconnect(self, id):
         if self.isLoggedIn(id):
             username = self.clients[id]["username"]
-            self.Server.sendAll(
+            self.server.say(
                 f"User {username} has disconnected from the server.")
         del self.clients[id]
 
@@ -38,15 +38,21 @@ class AccountsSystem:
                 username = command
                 self.clients[id]["username"] = username
                 if self.playersSystem.playerExists(username):
-                    self.Server.send(id, "Password: ")
+                    self.server.send(id, "Password: ")
                 else:
-                    self.Server.send(id,
+                    self.server.send(id,
                                      "Please type a password for your new account.")
-                    self.Server.send(id, "Password: ")
+                    self.server.send(id, "Password: ")
             else:
                 password = command
                 username = self.clients[id]["username"]
-                self.login(id, password)
+                if not self.isOnline(username):
+                    self.login(id, password)
+                else:
+                    self.server.send(
+                        id, "This account is already logged in, from another location.")
+                    del self.clients[id]["username"]
+                    self.server.send(id, "Username: ")
         else:
             return False  # todo add logout commands
         return True  # stop event system from triggering the rest of the listeners
@@ -69,6 +75,13 @@ class AccountsSystem:
                 onlineUsers.append(self.getUsername(id))
         return onlineUsers
 
+    def isOnline(self, username):
+        for id in self.clients:
+            if self.isLoggedIn(id):
+                if username == self.getUsername(id):
+                    return True
+        return False
+
     def getOnlineUsersCount(self):
         return len(self.getOnlineUsers())
 
@@ -83,16 +96,16 @@ class AccountsSystem:
             if password == self.playersSystem.players[username]["password"]:
                 self.clients[id]["loggedIn"] = True
                 Logger.log(f"User '{username}'' has logged in!")
-                self.Server.send(id, f"Welcome back {username}!")
+                self.server.pm(id, f"Welcome back {username}!")
                 self.Events.trigger("login", id)
             else:
                 Logger.log(
                     f"Invalid login attempt on account {username}!", "red")
-                self.Server.send(id, f"Invalid password!")
+                self.server.send(id, f"Invalid password!")
         else:
             Logger.log(f"User '{username}' has logged in!")
-            self.Server.send(id, f"Welcome to Dark Nebula {username}!")
-            self.playersSystem.initPlayer(username)
+            self.server.pm(id, f"Welcome to Dark Nebula {username}!")
+            self.playersSystem.initPlayer(username, password)
             self.clients[id]["loggedIn"] = True
             self.Events.trigger("firstLogin", id)
-            self.Server.sendAll(f"Welcome {username} to the server!")
+            self.server.say(f"Welcome {username} to the server!")

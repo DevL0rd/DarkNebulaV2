@@ -47,7 +47,7 @@ class MudGraphics:
         Logger = Logging(events, "Graphics")
         self.Events = events
         self.on = events.on
-        self.Server = server
+        self.server = server
         self.clients = {}
         self.players = {}
         self.settings = settings
@@ -57,45 +57,45 @@ class MudGraphics:
         self.splash(id)
 
     def seperator(self, id):
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#**o**~**o**~**o**~**o**~**o**~**o**~**o**~**o**~**o**~**o**~**o**~**o**~**o**#"+self.formatting["reset"])
 
     def splash(self, id):
         self.seperator(id)
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"                  *                         *            .                   "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"   *    /$$    .                /$$               .                          "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"       | $$                    | $$                         *          *     "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"   /$$$$$$$  /$$$$$$   /$$$$$$ | $$   /$$     *    .            .            "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"  /$$__  $$ |____  $$ /$$__  $$| $$  /$$/                                    "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+" | $$  | $$  /$$$$$$$| $$  \__/| $$$$$$/            *                 *      "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+" | $$  | $$ /$$__  $$| $$      | $$_  $$                                     "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+" |  $$$$$$$|  $$$$$$$| $$      | $$ \  $$          .         *               "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"  \_______/ \_______/|__/      |__/  \__/                                *   "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"           *                 *             /$$          *      /$$           "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"                      .                   | $$                | $$           "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+" *    *           *    /$$$$$$$   /$$$$$$ | $$$$$$$  /$$   /$$| $$  /$$$$$$  "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"             .        | $$__  $$ /$$__  $$| $$__  $$| $$  | $$| $$ |____  $$ "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"      *               | $$  \ $$| $$$$$$$$| $$  \ $$| $$  | $$| $$  /$$$$$$$ "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"           *          | $$  | $$| $$_____/| $$  | $$| $$  | $$| $$ /$$__  $$ "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+" *     .          *   | $$  | $$|  $$$$$$$| $$$$$$$/|  $$$$$$/| $$|  $$$$$$$ "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"                      |__/  |__/ \_______/|_______/  \______/ |__/ \_______/ "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
-        self.Server.send(
+        self.server.send(
             id, self.formatting["bold"]+"#"+self.formatting["fg"]["blue"]+"             *            .                            *                .    "+self.formatting["reset"]+self.formatting["bold"]+"#"+self.formatting["reset"])
         self.seperator(id)

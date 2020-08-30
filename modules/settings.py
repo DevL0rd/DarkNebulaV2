@@ -9,7 +9,7 @@ class Settings:
             "chat": {
                 "sayMessageColor": "cyan",
                 "sayTagColor": "blue",
-                "pmMessageColor": "lime",
+                "pmMessageColor": "green",
                 "pmTagColor": "green",
                 "serverMessageColor": "purple",
                 "serverTagColor": "red",
@@ -40,7 +40,12 @@ class Settings:
                     "hp": 100,
                     "hp_max": 100
                 }
-            ]
+            ],
+            "universeGenerator": {
+                "width": 1000,
+                "height": 1000,
+                "spawnChance": 2
+            }
         }
 
     def getSettings(self):
@@ -54,3 +59,6 @@ class Settings:
 
     def getStartingShips(self):
         return self.settings["startingShips"]
+
+    def getUniverseSettings(self):
+        return self.settings["universeGenerator"]
