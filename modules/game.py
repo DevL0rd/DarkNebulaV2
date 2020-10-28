@@ -32,10 +32,13 @@ class GameLogic:
     def updateResources(self, delta):
         players = self.playersSystem.getPlayers()
         # some logic here
+        for player in players:
+            for ship in player.ships:
+                if ship["type"] == "miner":
+                    player.resources
 
-
-#ships that you can build
-ships = {
+        # ships that you can build
+self.ships = {
     "probe": {
         "cost": 100,
         "energy": 10,
